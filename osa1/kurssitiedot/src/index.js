@@ -2,21 +2,21 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 
 const Header = (props) => {
-	return (
-		<>
-			<h1>{props.course}</h1>
-		</>
-	)
+  return (
+    <>
+      <h1>{props.course}</h1>
+    </>
+  )
 }
 
 const Content = (props) => {
-	return (
-		<>
-			<Part part={props.parts[0]} />
-			<Part part={props.parts[1]} />
-			<Part part={props.parts[2]} />
-		</>
-	)
+  return (
+    <>
+      <Part part={props.parts[0]} />
+      <Part part={props.parts[1]} />
+      <Part part={props.parts[2]} />
+    </>
+  )
 }
 
 const Total = (props) => {
