@@ -126,6 +126,12 @@ const App = () => {
                 ? person
                 : returnedPerson
               ))
+              setIsError(false)
+              setNotification(`Replaced number of ${changedPerson.name}`)
+
+              setTimeout(() => {
+                setNotification(null)
+              }, 5000)
             })
             .catch(e => {
               setIsError(true)
@@ -135,13 +141,6 @@ const App = () => {
                 setError(null)
               }, 5000)
             })
-
-          setIsError(false)
-          setNotification(`Replaced number of ${changedPerson.name}`)
-
-          setTimeout(() => {
-            setNotification(null)
-          }, 5000)
         }
       }
     })
@@ -154,14 +153,23 @@ const App = () => {
 
       personService
         .create(newPerson)
-        .then(returnedPerson => setPersons(persons.concat(returnedPerson)))
+        .then(returnedPerson => {
+          setPersons(persons.concat(returnedPerson))
+          setIsError(false)
+          setNotification(`Added ${newName}`)
 
-      setIsError(false)
-      setNotification(`Added ${newName}`)
-
-      setTimeout(() => {
-        setNotification(null)
-      }, 5000)
+          setTimeout(() => {
+            setNotification(null)
+          }, 5000)
+        })
+        .catch(error => {
+          setIsError(true)
+          setError(error.response.data.error)
+          
+          setTimeout(() => {
+            setError(null)
+          }, 5000)
+        })
     }
     setNewName('')
     setNewNumber('')
